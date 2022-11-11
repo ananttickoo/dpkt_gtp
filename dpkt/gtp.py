@@ -13,9 +13,6 @@ from binascii import hexlify as hx
 # across the Gn and Gp interface
 # https://www.3gpp.org/DynaReport/29060.htm
 # 
-# General Packet Radio System (GPRS) Tunnelling Protocol User Plane (GTPv1-U)
-# https://www.3gpp.org/DynaReport/29281.htm
-#
 # 3GPP Evolved Packet System (EPS);
 # Evolved General Packet Radio Service (GPRS) Tunnelling Protocol
 # for Control plane (GTPv2-C); Stage 3 
@@ -24,6 +21,147 @@ from binascii import hexlify as hx
 # Telecommunication management; Charging management;
 # Charging Data Record (CDR) transfer
 # https://www.3gpp.org/DynaReport/32295.htm
+
+# GTPv1 Message Types
+V1_UNKNOWN = 0
+V1_ECHO_REQ = 1
+V1_ECHO_RES = 2
+V1_VER_NOT_SUPPORTED = 3
+V1_NODE_ALIVE_REQ = 4
+V1_NODE_ALIVE_RES = 5
+V1_REDIRECT_REQ = 6
+V1_REDIRECT_RES = 7
+V1_CREATE_PDP_CXT_REQ = 16
+V1_CREATE_PDP_CXT_RES = 17
+V1_UPDATE_PDP_CXT_REQ = 18
+V1_UPDATE_PDP_CXT_RES = 19
+V1_DELETE_PDP_CXT_REQ = 20
+V1_DELETE_PDP_CXT_RES = 21
+V1_INIT_PDP_CXT_ACT_REQ = 22
+V1_INIT_PDP_CXT_ACT_RES = 23
+V1_ERROR_INDICATION = 26
+V1_PDU_NOTIFICATION_REQ = 27
+V1_PDU_NOTIFICATION_RES = 28
+V1_PDU_NOTIFICATION_REJECT_REQ = 29
+V1_PDU_NOTIFICATION_REJECT_RES = 30
+V1_SUPPORTED_EXT_HEADER_NOTIFY = 31
+V1_SEND_ROUTING_INFO_GPRS = 32
+V1_SEND_ROUTING_INFO_GPRS = 33
+V1_FAILURE_REPORT_REQ = 34
+V1_FAILURE_REPORT_RES = 35
+V1_NOTE_MS_GPRS_PRESENT_REQ = 36
+V1_NOTE_MS_GPRS_PRESENT_RES = 37
+V1_INDICATION_REQ = 48
+V1_INDICATION_RES = 49
+V1_SGSN_CXT_REQ = 50
+V1_SGSN_CXT_RES = 51
+V1_SGSN_CXT_ACK = 52
+V1_FORWARD_RELOC_REQ = 53
+V1_FORWARD_RELOC_RES = 54
+V1_FORWARD_RELOC_COMPLETE = 55
+V1_RELOC_CANCEL_REQ = 56
+V1_RELOC_CANCEL_RES = 57
+V1_FORWARD_SRNS_CXT = 58
+V1_FORWARD_RELOC_COMPLETE_ACK = 59
+V1_FORWARD_SRNS_CXT_ACK = 60
+V1_UE_REGIST_QUERY_REQ = 61
+V1_UE_REGIST_QUERY_RES = 62
+V1_RAN_INFORMATION_RELAY = 70
+V1_MBMS_NOTIFICATION_REQ = 96
+V1_MBMS_NOTIFICATION_RES = 97
+V1_MBMS_NOTIFICATION_REJECT_REQ = 98
+V1_MBMS_NOTIFICATION_REJECT_RES = 99
+V1_CREATE_MBMS_CXT_REQ = 100
+V1_CREATE_MBMS_CXT_RES = 101
+V1_UPDATE_MBMS_CXT_REQ = 102
+V1_UPDATE_MBMS_CXT_RES = 103
+V1_DELETE_MBMS_CXT_REQ = 104
+V1_DELETE_MBMS_CXT_RES = 105
+V1_MBMS_REGIST_REQ = 112
+V1_MBMS_REGIST_RES = 113
+V1_MBMS_DEREGIST_REQ = 114
+V1_MBMS_DEREGIST_RES = 115
+V1_MBMS_SESSION_START_REQ = 116
+V1_MBMS_SESSION_START_RES = 117
+V1_MBMS_SESSION_STOP_REQ = 118
+V1_MBMS_SESSION_STOP_RES = 119
+V1_MBMS_SESSION_UPDATE_REQ = 120
+V1_MBMS_SESSION_UPDATE_RES = 121
+V1_MS_INFO_CHANGE_NOTIFY_REQ = 128
+V1_MS_INFO_CHANGE_NOTIFY_RES = 129
+V1_DATA_RECORD_TRANSFER_REQ = 240
+V1_DATA_RECORD_TRANSFER_RES = 241
+V1_END_MARKER = 254
+V1_G_PDU = 255
+
+# GTPv1 Next Extension Headers
+NO_MORE_EXT_HEADERS = 0
+MBMS_SUPPORT_INDICATION = 1
+MS_INFO_CHANVE_REPORTING_SUPPORT = 2
+PDCP_PDU_NUMBER = 192
+SUSPEND_REQUEST = 193
+SUSPEND_RESPONSE = 194
+
+# GTPv1 IEs without length
+TV_RESERVED = 0
+TV_CAUSE = 1
+TV_IMSI = 2
+TV_RAI = 3
+TV_TLLI = 4
+TV_P_TMSI = 5
+TV_REORDER_REQUIRED = 8
+TV_AUTH_TRIPLET = 9
+TV_MAP_CAUSE = 11
+TV_P_TMSI_SIGN = 12
+TV_MS_VALIDATED = 13
+TV_RECOVERY = 14
+TV_SELECTION_MODE = 15
+TV_TEID_DATA_1 = 16
+TV_TEID_C_PLANE = 17
+TV_TEID_DATA_2 = 18
+TV_TEARDOWN_IND = 19
+TV_NSAPI = 20
+TV_RANAP_CAUSE = 21
+TV_RAB_CXT = 22
+TV_RADIO_PRIORITY_SMS = 23
+TV_RADIO_PRIORITY = 24
+TV_PACKET_FLOW_ID = 25
+TV_CHARGING_CHARS = 26
+TV_TRACE_REFERENCE = 27
+TV_TRACE_TYPE = 28
+TV_MS_NOT_REACHABLE_REASON = 29
+TV_CHARGING_ID = 127
+
+TV_LEN_DICT = {
+    TV_RESERVED: 0,
+    TV_CAUSE: 1,
+    TV_IMSI: 8,
+    TV_RAI: 6,
+    TV_TLLI: 4,
+    TV_P_TMSI: 4,
+    TV_REORDER_REQUIRED: 1,
+    TV_AUTH_TRIPLET: 28,
+    TV_MAP_CAUSE: 1,
+    TV_P_TMSI_SIGN: 3,
+    TV_MS_VALIDATED: 1,
+    TV_RECOVERY: 1,
+    TV_SELECTION_MODE: 1,
+    TV_TEID_DATA_1: 4,
+    TV_TEID_C_PLANE: 4,
+    TV_TEID_DATA_2: 5,
+    TV_TEARDOWN_IND: 1,
+    TV_NSAPI: 1,
+    TV_RANAP_CAUSE: 1,
+    TV_RAB_CXT: 9,
+    TV_RADIO_PRIORITY_SMS: 1,
+    TV_RADIO_PRIORITY: 1,
+    TV_PACKET_FLOW_ID: 2,
+    TV_CHARGING_CHARS: 2,
+    TV_TRACE_REFERENCE: 2,
+    TV_TRACE_TYPE: 2,
+    TV_MS_NOT_REACHABLE_REASON: 1,
+    TV_CHARGING_ID: 4
+}
 
 
 # GTPv2 Message Types
@@ -188,16 +326,21 @@ class GTPv1C(dpkt.Packet):
             )
             self.npdu = compat_ord(self.data[2])
             self.next_type = compat_ord(self.data[3])
-            self.data = self.data[5:]
+            self.data = self.data[4:]
 
         l = []
         while self.data:
-            ie = InfoElement(self.data)
+            ie = IEv1(self.data)
             l.append(ie)
             self.data = self.data[len(ie):]
         self.data = self.ies = l
 
     def pack_hdr(self):
+        if type(self.data) != list:
+            return dpkt.Packet.pack_hdr(self)
+        else:
+            data = b''.join([bytes(d) for d in self.data])
+
         if self.__additionals:
             self.seqnum = struct.pack('BB',
                 (self.seqnum >> 8) & 0xff,
@@ -205,8 +348,7 @@ class GTPv1C(dpkt.Packet):
             )
             self.npdu = struct.pack('B', self.npdu & 0xff)
             self.next_type = struct.pack('B', self.next_type & 0xff)
-        else:
-            self.seqnum = self.npdu = self.next_type = b''
+            data = self.seqnum + self.npdu + self.next_type + data
 
         self.data = self.seqnum + self.npdu + self.next_type + b''.join([bytes(d) for d in self.data])
         self.len = len(self.data)
@@ -275,44 +417,82 @@ class GTPv2C(dpkt.Packet):
             self.data = self.data[8:]
         else:
             self.seqnum = self.data[:3]
-            # self.spare = self.data[4]
             self.data = self.data[5:]
 
         l = []
         while self.data:
-            ie = InfoElement(self.data)
+            ie = IEv2(self.data)
             l.append(ie)
             self.data = self.data[len(ie):]
         self.data = self.ies = l
 
     def pack_hdr(self):
-        if self.t_flag:
-            self.teid = struct.pack('4B',
-                (self.teid >> 24) & 0xff,
-                (self.teid >> 16) & 0xff,
-                (self.teid >> 8) & 0xff,
-                (self.teid) & 0xff,
-            )
+        if type(self.data) != list:
+            return dpkt.Packet.pack_hdr(self)
         else:
-            self.teid = b''
+            data = b''.join([bytes(d) for d in self.data])
 
-        self.seqnum = struct.pack('3B',
-            (self.seqnum >> 16) & 0xff,
-            (self.seqnum >> 8) & 0xff,
-            (self.seqnum) & 0xff,
-        )
+            self.seqnum = struct.pack('3B',
+                (self.seqnum >> 16) & 0xff,
+                (self.seqnum >> 8) & 0xff,
+                (self.seqnum) & 0xff,
+            )
+            data = self.seqnum + b'\x00' + data
 
-        self.data = self.teid + self.seqnum + b'\x00' + b''.join([bytes(d) for d in self.data])
-        self.len = len(self.data)
+            if self.t_flag:
+                self.teid = struct.pack('4B',
+                    (self.teid >> 24) & 0xff,
+                    (self.teid >> 16) & 0xff,
+                    (self.teid >> 8) & 0xff,
+                    (self.teid) & 0xff,
+                )
+                data = self.teid + data
 
-        return dpkt.Packet.pack_hdr(self)
+            self.data = data
+            self.len = len(self.data)
+            return dpkt.Packet.pack_hdr(self)
 
 
-class InfoElement(dpkt.Packet):
-    """docstring for InfoElement
+class IEv1(dpkt.Packet):
+    """docstring for IEv1
+        __hdr__ : Information Element Header for GTPv1-C.
+                   - type : IE Type
+                   - len  : length
+    """
+    __hdr__ = (
+        ('type', 'B', 0),
+    )
+
+    @property
+    def encoding(self):
+        return (self.type >> 7) & 0x1
+
+    @encoding.setter
+    def encoding(self, e):
+        self.type = (self.type & ~0x80) | ((e & 0x1) << 7) 
+
+    def unpack(self, buf):
+        dpkt.Packet.unpack(self, buf)
+        self.len = TV_LEN_DICT.get(self.type, len(self.data))
+        self.data = self.data[:self.len]
+
+    def pack_hdr(self):
+        data = dpkt.Packet.pack_hdr(self)
+        if self.encoding:
+            self.len = struct.pack('BB',
+                (len(self.data) >> 8) & 0xff,
+                (len(self.data) & 0xff)
+            )
+            data = data[:1] + self.len + data[2:3] + data[3:]
+
+        return data
+
+
+class IEv2(dpkt.Packet):
+    """docstring for IEv2
 
     Attributes:
-        __hdr__ : Information Element Header.
+        __hdr__ : Information Element Header for GTPv2-C.
                    - type : IE Type
                    - len  : length
                    - flags: CR flag and Instance
@@ -349,7 +529,7 @@ class InfoElement(dpkt.Packet):
 
 
 __v1c_payloads = [
-    b'2 \x00%\x00\x00\x00\x10\x00\n\xca\xfe', # Header
+    b'2\x10\x00%\x00\x00\x00\x10\x00\n\xca\xfe', # Header
     b'\x01\x00\x08\x00D\x90\x01\x12#4E\xf5', #IMSI
     b'G\x00\x11\x00some.operator.net' # APN
 ]
@@ -373,7 +553,7 @@ def test_unpack():
     assert (v2c.type == V2_CREATE_SESSION_REQ)
     assert (v2c.len == 41)
     assert (v2c.teid == 0x00000010)
-    assert (v2c.seqnum == 0x0001000a)
+    assert (v2c.seqnum == 0x01000a)
 
     imsi = v2c.ies[0]
     assert (imsi.type == 1)
@@ -395,10 +575,10 @@ def test_unpack():
     assert (v1c.e_flag == 0)
     assert (v1c.s_flag == 1)
     assert (v1c.np_flag == 0)
-    assert (v1c.type == V2_CREATE_SESSION_REQ)
+    assert (v1c.type == V1_CREATE_PDP_CXT_REQ)
     assert (v1c.len == 37)
     assert (v1c.teid == 0x00000010)
-    assert (v1c.seqnum == 0x0001000a)
+    assert (v1c.seqnum == 0x000a)
     assert (v1c.npdu == 0xca)
     assert (v1c.next_type == 0xfe)
 
@@ -423,9 +603,9 @@ def test_pack():
         e_flag=0,
         s_flag=1,
         np_flag=0,
-        type=V2_CREATE_SESSION_REQ,
+        type=V1_CREATE_PDP_CXT_REQ,
         teid=0x00000010,
-        seqnum=0x0001000a,
+        seqnum=0x000a,
         npdu=0xca,
         next_type=0xfe
         )
@@ -436,17 +616,17 @@ def test_pack():
         t_flag=1,
         type=V2_CREATE_SESSION_REQ,
         teid=0x00000010,
-        seqnum=0x0001000a
+        seqnum=0x01000a
         )
 
     infoelems = [
-        InfoElement(
+        IEv2(
             type=1,
             cr_flag=0,
             instance=0,
             data=b'D\x90\x01\x12#4E\xf5'
         ),
-        InfoElement(
+        IEv2(
             type=71,
             cr_flag=0,
             instance=0,
